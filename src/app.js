@@ -13,28 +13,19 @@ const vallas_route = require("./routes/vallas");
 const cestos_route = require("./routes/cestos");
 const reduct_route = require("./routes/reductores");
 const pisos_route = require("./routes/pisos");
-// -----------------------------------------------------------------------DEPENDENCIES
+const presup_route = require("./routes/presupuesto");
+// -----------------------------------------------------------------------USO DE DEPENDENCIAS
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
+// -----------------------------------------------------------------------PRESUPUESTO
+app.use("/presupuesto", presup_route);
 // -----------------------------------------------------------------------EMAIL
 app.use("/email", email_route);
-// -----------------------------------------------------------------------SEÑALIZACION
-app.use("/products", señal_route);
-// -----------------------------------------------------------------------TACHOS
-app.use("/products", tachos_route);
-// -----------------------------------------------------------------------LUCES LED
-app.use("/products", luces_route);
-// -----------------------------------------------------------------------VALLAS
-app.use("/products", vallas_route);
-// -----------------------------------------------------------------------CESTOS
-app.use("/products", cestos_route);
-// -----------------------------------------------------------------------REDUCTORES
-app.use("/products", reduct_route);
-// -----------------------------------------------------------------------PISOS
-app.use("/products", pisos_route);
+// -----------------------------------------------------------------------SEÑALIZACION,TACHOS, LUCES LED, VALLAS, CESTOS, REDUCTORES, PISOS
+app.use("/products", señal_route, tachos_route, luces_route, vallas_route, cestos_route, reduct_route, pisos_route);
 
 app.listen(port, () => {
   console.log(`Server On at port: ${port}`);

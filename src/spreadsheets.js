@@ -4,6 +4,17 @@ const credentials = require("./json/credentials.json");
 
 let googleId = "1GH4-SriMOXj_umoYInO1Kr2SNQPNMikeJfmvKz90p-M";
 
+
+
+async function postProduct(pObjeto){
+  const doc = new GoogleSpreadsheet(googleId);
+  await doc.useServiceAccountAuth(credentials);
+  await doc.loadInfo();
+
+  const sheet = doc.sheetsByIndex[7];
+  
+  sheet.addRow(pObjeto);
+}
 // -----------------------------------------------------------------------SEÑALIZACIÓN
 async function getAll() {
   const doc = new GoogleSpreadsheet(googleId);
@@ -53,6 +64,12 @@ const getbyId = async (id) => {
   }
   return resp;
 };
+
+
+
+
+
+
 // -----------------------------------------------------------------------TACHOS
 async function getAllTachos() {
   const doc = new GoogleSpreadsheet(googleId);
@@ -361,4 +378,5 @@ module.exports = {
   getReductbyId: getReductbyId,
   getAllPisos: getAllPisos,
   getPisosbyId: getPisosbyId,
+  postProduct:postProduct,
 };
